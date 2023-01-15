@@ -29,9 +29,10 @@ int main(int argc, char **argv)
 }
 
 void getval(float * nn){
-  char *value = *(char**)nn;
-  printf ("value inside is: 0x%x = ", (unsigned int)value);
-  dispbits ((unsigned int)value);
+  unsigned int num = *(unsigned int*)nn;
+
+  printf ("value inside is: 0x%x = ", num);
+  dispbits (num);
 }
 
 void dispbits(unsigned int val){
@@ -46,20 +47,6 @@ void dispbits(unsigned int val){
 	
 	
 void floatbits(float val){
-  //size_t size = sizeof(val);
-  //unsigned char *p = (unsigned char *)&val;
-  //printf ("*p = %x%x%x%x\n", p[3], p[2], p[1], p[0]);
-  //printf ("%d = %x\n", num, num);
-  //p += size-1;
-  //int mask = 1<<31;
-  //while (size--){
-  //  int i;
-  //  for (i = 0; i<8; i++){
-  //    putchar (*p & 128?'1':'0');
-  //    *p <<= 1;
-  //  }
-  //  p--;
-  //}
   int i;
   int mask = 1<<31;
   unsigned int num = *(unsigned int*)&val;
