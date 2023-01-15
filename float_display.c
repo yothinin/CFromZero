@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 void getval (float * n3);
 void dispbits (unsigned int val);
@@ -11,12 +10,12 @@ int main(int argc, char **argv)
 {
   float n3 = 0.30f;
   float n7 = 0.70f;
-  
+
   intbits(0x3f33333a, 32);
-  
+
   printf ("%0.24f = ", 0.3f);
   floatbits (0.3f);
-  
+
   printf ("n3 = %0.24f, n7 = %0.24f\n\n", n3, n7);
   printf ("address of n3 is: %p, \n", &n3);
   getval (&n3);
@@ -44,8 +43,7 @@ void dispbits(unsigned int val){
   }
   printf ("\n\n");
 }
-	
-	
+
 void floatbits(float val){
   int i;
   int mask = 1<<31;
