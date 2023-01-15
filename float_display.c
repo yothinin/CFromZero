@@ -1,7 +1,10 @@
 #include <stdio.h>
 
-void getval (float * n3);
+unsigned int getVal(unsigned int *n3);
+char *dispBits (unsigned int val, int bits);
+
 void dispbits (unsigned int val);
+void getval (float * n3);
 void floatbits (float val);
 void printhex (int val);
 void intbits (unsigned int val, int bit);
@@ -23,8 +26,55 @@ int main(int argc, char **argv)
   getval (&n7);
 
   printhex(200);
+  printf ("\n\n");
+
+  // n7 เป็นตัวแปรแบบ float เมื่ออ้างถึงตำแหน่งก็จะเป็น pointer to float
+  // ดังนั้นเราต้องแปลงจาก pointer to float ให้เป็น pointer to unsigned int
+  // ค่า n7Ptr จะถูกส่งไปให้กับฟังค์ชัน getVar() 
+  unsigned int *n7Ptr = (unsigned int*)&n7;
+
+  printf ("getVal(n7Ptr) = 0x%x\n", getVal(n7Ptr)); //ส่งค่า unsigned กลับ
+  // แสดงค่าบิตโดยอ่านจากฟังค์ชัน getVar()
+  printf ("dispBits(getVal(n7Ptr), 32)) = %s\n", dispBits(getVal(n7Ptr), 32)); 
+   
+  // สั่งให้แสดงค่าบิตโดยกำหนดตัวเลขโดยตรง
+  printf ("dispBits(0x%x) = %s\n", 0x3f19999a, dispBits(0x3f19999a, 32));
 
   return 0;
+}
+
+/*
+ * Function : unsigned int getVal(float *nn) 
+ * Purpose  : ใช้อ่านค่าตัวเลขที่อยู่ในหน่วยความจำ
+ * Parameter: โปรแกรมจะรับค่าพารามิเตอร์ 1 ค่า คือ
+ *          : float *nn - เป็นพอยเตอร์ของตำแหน่งที่เราจะอ่าน
+ * Return   : ส่งค่ากลับเป็น unsigned int ซึ่งเป็นค่าของตัวแปรที่อ่านได้ พิมพ์ด้วย %x ได้
+ */
+//unsigned int getVal(float *nn){
+unsigned int getVal(unsigned int *nn){
+  unsigned int num = *(unsigned int *)nn;
+  return num;
+}
+
+/*
+ * Function  : char * dispBits(unsigned int val, int bits)
+ * Purpose   : ใช้สำหรับแปลงค่าตัวเลขฐานสิบหรือสิบหกให้เป็นเลขฐานสอง
+ * Parameter : val   - ข้อมูลชนิด unsigned int เป็นตัวเลขที่ต้องการจะแปลงเป็นเลขฐานสอง
+ *           : bits  - ข้อมูลชนิด int เป็นตัวเลขสำหรับกำหนดจำนวนบิตที่จะแสดงผล
+ * Returned  : char* - ส่งข้อมูลชุดตัวอักษรกลับไปยังฟังค์ชันที่เรียก สามารถพิมพ์ด้วย %s ได้ 
+ */
+char *dispBits(unsigned int val, int bits){
+  char arr[bits+1];
+  int i;
+  int mask = 1 << (bits-1);
+  for (i = 0; i < bits; i++){
+    arr[i] = val & mask ? '1':'0';
+    val <<= 1;
+  }
+
+  arr[i] = '\0';
+  char *ret = arr;
+  return ret;
 }
 
 void getval(float * nn){
@@ -43,6 +93,7 @@ void dispbits(unsigned int val){
   }
   printf ("\n\n");
 }
+
 
 void floatbits(float val){
   int i;
