@@ -5,6 +5,7 @@
 char *dispBits1 (unsigned int val, int bits);
 char *dispBits2 (unsigned int val, int bits);
 char *dispBitsM (unsigned int val, int bits);
+void dispBitsA (unsigned int val, int bits, char arr[]);
 
 int main(int argc, char **argv)
 {
@@ -21,8 +22,22 @@ int main(int argc, char **argv)
   printf ("dispBitsM(%x, 32) = %s\n", num, cBitsM);
 
   free (cBitsM); //คืนหน่วยความจำเพราะในฟังค์ชันจองพื้นที่ไว้
+  
+  char arr[33] = {'\0'};
+  dispBitsA(num, 32, arr);
+  printf ("arr = %s\n", arr);
 
   return 0;
+}
+
+void dispBitsA (unsigned int val, int bits, char arr[]){
+  int i, mask;
+  mask = 1<<(bits-1);
+  for (i = 0; i < bits; i++){
+    arr[i] = val & mask ? '1':'0';
+    val <<= 1;
+  }
+  arr[i] = '\0';
 }
 
 char *dispBits1(unsigned int val, int bits){
