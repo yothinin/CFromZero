@@ -32,6 +32,8 @@ int main(int argc, char **argv)
   // ดังนั้นเราต้องแปลงจาก pointer to float ให้เป็น pointer to unsigned int
   // ค่า n7Ptr จะถูกส่งไปให้กับฟังค์ชัน getVar() 
   unsigned int *n7Ptr = (unsigned int*)&n7;
+  char *hex = dispBits(getVal(n7Ptr), 32);
+  printf ("hex: %s\n", hex);
 
   printf ("getVal(n7Ptr) = 0x%x\n", getVal(n7Ptr)); //ส่งค่า unsigned กลับ
   // แสดงค่าบิตโดยอ่านจากฟังค์ชัน getVar()
@@ -74,7 +76,7 @@ char *dispBits(unsigned int val, int bits){
 
   arr[i] = '\0';
   char *ret = arr;
-  return ret;
+  return ret; // Wrong, should have unknowed bihavior because scope of stack.
 }
 
 void getval(float * nn){
