@@ -30,15 +30,15 @@ int main(int argc, char **argv)
 
   // n7 เป็นตัวแปรแบบ float เมื่ออ้างถึงตำแหน่งก็จะเป็น pointer to float
   // ดังนั้นเราต้องแปลงจาก pointer to float ให้เป็น pointer to unsigned int
-  // ค่า n7Ptr จะถูกส่งไปให้กับฟังค์ชัน getVar() 
+  // ค่า n7Ptr จะถูกส่งไปให้กับฟังค์ชัน getVar()
   unsigned int *n7Ptr = (unsigned int*)&n7;
   char *hex = dispBits(getVal(n7Ptr), 32);
   printf ("hex: %s\n", hex);
 
   printf ("getVal(n7Ptr) = 0x%x\n", getVal(n7Ptr)); //ส่งค่า unsigned กลับ
   // แสดงค่าบิตโดยอ่านจากฟังค์ชัน getVar()
-  printf ("dispBits(getVal(n7Ptr), 32)) = %s\n", dispBits(getVal(n7Ptr), 32)); 
-   
+  printf ("dispBits(getVal(n7Ptr), 32)) = %s\n", dispBits(getVal(n7Ptr), 32));
+
   // สั่งให้แสดงค่าบิตโดยกำหนดตัวเลขโดยตรง
   printf ("dispBits(0x%x) = %s\n", 0x3f19999a, dispBits(0x3f19999a, 32));
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 }
 
 /*
- * Function : unsigned int getVal(float *nn) 
+ * Function : unsigned int getVal(float *nn)
  * Purpose  : ใช้อ่านค่าตัวเลขที่อยู่ในหน่วยความจำ
  * Parameter: โปรแกรมจะรับค่าพารามิเตอร์ 1 ค่า คือ
  *          : float *nn - เป็นพอยเตอร์ของตำแหน่งที่เราจะอ่าน
@@ -63,7 +63,7 @@ unsigned int getVal(unsigned int *nn){
  * Purpose   : ใช้สำหรับแปลงค่าตัวเลขฐานสิบหรือสิบหกให้เป็นเลขฐานสอง
  * Parameter : val   - ข้อมูลชนิด unsigned int เป็นตัวเลขที่ต้องการจะแปลงเป็นเลขฐานสอง
  *           : bits  - ข้อมูลชนิด int เป็นตัวเลขสำหรับกำหนดจำนวนบิตที่จะแสดงผล
- * Returned  : char* - ส่งข้อมูลชุดตัวอักษรกลับไปยังฟังค์ชันที่เรียก สามารถพิมพ์ด้วย %s ได้ 
+ * Returned  : char* - ส่งข้อมูลชุดตัวอักษรกลับไปยังฟังค์ชันที่เรียก สามารถพิมพ์ด้วย %s ได้
  */
 char *dispBits(unsigned int val, int bits){
   char arr[bits+1];
